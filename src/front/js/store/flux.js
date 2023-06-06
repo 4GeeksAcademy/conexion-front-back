@@ -1,3 +1,5 @@
+import { string } from "prop-types";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -13,7 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			token: "",
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -46,6 +49,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			isAuthenticated: (token) =>{
+				const options = {
+					method: 'POST',
+					headers:{
+						"Content-Type": "application/json",
+						"Authorization": 'Bearer '+token
+					},
+					body: JSON.stringify({})
+				}
+				
+				console.log(options.headers.Authorization)    
+			
+				fetch(process.env.BACKEND_URL + "/api/private", options)
+				.then(response => response.json())
+				.then(response => {
+					console.log(response)
+				})
+				.catch(error => console.log('error', error));
 			}
 		}
 	};
