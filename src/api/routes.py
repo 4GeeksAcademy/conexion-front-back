@@ -69,6 +69,6 @@ def validate_token():
     return jsonify("User authenticated"), 200
     
 
-    return jsonify({"id": user.id, "email": user.email}, 200)
+    #return jsonify({"id": user.id, "email": user.email}, 200)
     #return jsonify("Authenticated")
     

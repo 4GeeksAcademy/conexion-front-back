@@ -16,7 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			token: "",
+			storeToken: false,
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -60,14 +60,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify({})
 				}
 				
-				console.log(options.headers.Authorization)    
+				//console.log(options.headers.Authorization)    
 			
 				fetch(process.env.BACKEND_URL + "/api/private", options)
-				.then(response => response.json())
 				.then(response => {
-					console.log(response)
-				})
+					if (response.status === 200){
+
+						response.json()}
+						else{
+							throw Error("There was a problem in the login request")
+						}
+					})
+				.then(response => setStore({storeToken: true}))
 				.catch(error => console.log('error', error));
+			},
+			signOut: ()=>{
+				setStore({storeToken: null})
 			}
 		}
 	};

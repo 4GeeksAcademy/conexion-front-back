@@ -22,31 +22,31 @@ export const Login = () => {
                 'Content-Type': 'application/json'
             }
         }
-        console.log(data)
+        //console.log(data)
 		fetch(process.env.BACKEND_URL + "/api/login", config)
 			.then((response) => response.json())
 			.catch(error => console.log('error', error))
 			.then(response => {
-                console.log(response)
+                //console.log(response)
 				// response.token?
                 //     actions.loadToken(response)
                 // :
                 // console.log(response)
                 if (response.message == "Email and password are required") {
-                    console.log("Email and password are required")
+                    //console.log("Email and password are required")
                     setAlertMessage(
                         <div className="alert alert-warning" role="alert">
                             Email and password are required
                         </div>)
                     
                 }if (response.message == "Email and password incorrect") {
-                    console.log("Email and password incorrect")
+                    //console.log("Email and password incorrect")
                     setAlertMessage(
                         <div className="alert alert-warning" role="alert">
                             Email and password incorrect
                         </div>)
                 }if (response.user_id) {
-                    console.log(response.message)
+                    //console.log(response.message)
                     //actions.loadToken(response.message);
                     localStorage.setItem('token', response.message);
                     console.log(localStorage.getItem('token'))
