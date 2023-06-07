@@ -21,9 +21,9 @@ export const Home = () => {
 					Login
 				</span>
 			</Link>
-			<Link to="/signin">
+			<Link to="/signup">
 				<span className="btn btn-success btn-lg" href="#" role="button">
-					Sign In
+					Sign Up
 				</span>
 			</Link>
 			<p>

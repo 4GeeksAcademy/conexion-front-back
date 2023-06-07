@@ -21,15 +21,17 @@ def handle_hello():
 @api.route('/signup', methods=['POST'])
 def handle_signup():
     request_body_user = request.get_json()
-
+    print(request_body_user)
     user = User.query.filter_by(email=request_body_user["email"], password=request_body_user["password"]).first()
+    #print(user)
     if user:
         return jsonify({"message": "Email and password already exist"})
     new_user = User(email=request_body_user["email"], password=request_body_user["password"])
+    print(new_user)
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify(request_body_user), 200 
+    return jsonify({"message": "New user added"}), 200 
 
 @api.route('/login', methods=['POST'])
 def login():
